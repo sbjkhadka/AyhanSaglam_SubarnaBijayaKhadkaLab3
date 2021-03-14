@@ -1,0 +1,27 @@
+{
+  "name": "ayhansaglam_subarnabijayakhadkalab3",
+  "version": "1.0.0",
+  "description": "this is assignment 3",
+  "main": "server.js",
+  "author": "Subarna Bijaya Khadka & Ayhan Saglam",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.12.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "start": "nodemon server",
+    "dev": "nodemon server"
+  }
+}
