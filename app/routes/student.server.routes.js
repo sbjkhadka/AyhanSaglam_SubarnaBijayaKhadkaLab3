@@ -1,14 +1,14 @@
-var students = require('../controllers/students.server.controller');
-var express = require('express');
+var students = require("../controllers/students.server.controller");
+var express = require("express");
 var router = express.Router();
 
-module.exports = (app) => {
-    app.get('/', (req, res)=>{res.json({a:10})})
-    app.post('/create', students.create);
-    app.post('/login', (req, res) => {
-        console.log('received');
-    });
-}
+module.exports = function (app) {
+  app.get("/students", students.requiresLogin, students.getAllStudents);  
+  app.post("/", students.create);
+  app.post("/signin", students.authenticate);
+  app.get("/signout", students.signout); 
+ 
+};
 
 // node
 // require('crypto').randomBytes(64).toString('hex')
