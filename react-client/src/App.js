@@ -1,30 +1,35 @@
 import React from 'react';
+import axios from "axios";
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
-  Redirect,
+  Route,
+  Switch
 } from "react-router-dom";
 import './App.css';
 import Create from './components/createStudent';
 import Home from './components/home';
-import {Button} from 'react-bootstrap';
 
 
 function App() {
+ 
   return (
     <div style={{ height: "100vh" }}>
       <Router>
         <div className="d-flex flex-row justify-content-around h-100 w-100">
           <div className="w-25" style={{ backgroundColor: "lavender" }}>
-            <a href="/create">Create new user</a>
-            <br />
-            <a href="/">Home</a>
+            <nav>
+              <Link to={"/"}>Home</Link>
+              <br />
+              <Link to={"/create"}>Create new user</Link>
+              <br />
+            </nav>
           </div>
           <div className="w-75">
-            <Route render={() => <Home />} path="/" />
-            <Route render={() => <Create />} path="/create" />
+            <Switch>
+              <Route render={() => <Create />} path="/create" />
+              <Route render={() => <Home />} path="/" />
+            </Switch>
           </div>
         </div>
       </Router>
