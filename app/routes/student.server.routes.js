@@ -5,8 +5,10 @@ var router = express.Router();
 module.exports = function (app) {
   app.get("/students", students.requiresLogin, students.getAllStudents);  
   app.post("/", students.create);
-  app.post("/signin", students.authenticate);
-  app.get("/signout", students.signout); 
+  app.post("/login", students.authenticateStudent);
+  app.get("/logout", students.signout); 
+
+  app.post("/read_cookie", students.isSignedIn);
  
 };
 
