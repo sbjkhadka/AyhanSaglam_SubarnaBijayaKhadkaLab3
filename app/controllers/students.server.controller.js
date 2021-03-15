@@ -25,7 +25,7 @@ const getErrorMessage = function (err) {
     }
   }
 };
-// Create a new user
+// Create a new student
 exports.create = function (req, res, next) {
   var student = new Student(req.body);
   console.log("body: " + req.body.firstName);
@@ -100,14 +100,12 @@ exports.authenticate = function (req, res, next) {
   });
 };
 
-
 //deletes the token on the client side by clearing the cookie named 'token'
 exports.signout = (req, res) => {
   res.clearCookie("token");
   return res.status("200").json({ message: "signed out" });
   res.redirect("/");
 };
-
 
 //isAuthenticated() method to check whether a student is currently authenticated
 exports.requiresLogin = function (req, res, next) {
