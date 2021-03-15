@@ -56,7 +56,79 @@ exports.list = function (req, res, next) {
     }
   });
 };
+//List the courses by student (courses chosen by a student)
 
+// Courses list by Students
+exports.coursesByStudent = function (req, res, next) {
+  var email = req.session.email;
+  console.log("session_email", email);
+  console.log("request", req.id);
+  Student.findOne({ email: req.session.email }, (err, student) => {
+    if (err) {
+      return getErrorMessage(err);
+    }    
+    console.log("Student :", student);    
+    req.student = student;
+  }).then(function () {   
+    Course.find(
+      {
+        student: req.student._id,        
+      },
+      (err, courses) => {
+        if (err) {
+          return getErrorMessage(err);
+        }        
+        res.status(200).json(courses);
+      }
+    );
+  });
+};
+
+// Courses list by Students
+// List the students who chose the course offered
+exports.coursesByStudent = function (req, res, next) {
+  var
+  var email = req.session.email;
+  console.log("session_email", email);
+  console.log("request", req.id);
+  Student.findOne({ email: req.session.email }, (err, student) => {
+    if (err) {
+      return getErrorMessage(err);
+    }    
+    console.log("Student :", student);    
+    req.student = student;
+  }).then(function () {   
+    Course.find(
+      {
+        student: req.student._id,        
+      },
+      (err, courses) => {
+        if (err) {
+          return getErrorMessage(err);
+        }        
+        res.status(200).json(courses);
+      }
+    );
+  });
+};
+
+
+//Update Course by given id
+exports.update = function (req, res) {
+  console.log('in update:', req.course)
+  const course = req.course;
+  course.save((err) => {
+      if (err) {
+          return res.status(400).send({
+              message: getErrorMessage(err)
+          });
+      } else {
+          res.status(200).json(course);
+      }
+  });
+};
+
+//Delete course by given id
 exports.delete = function (req, res) {
   const course = req.course;
   course.remove((err) => {
@@ -69,6 +141,22 @@ exports.delete = function (req, res) {
     }
   });
 };
+
+//Find by course id
+exports.courseByID = function (req, res, next, id) {
+  Course.findById(id).populate('creator', 'firstName lastName fullName').exec((err, article) => {if (err) return next(err);
+  if (!course) return next(new Error('Failed to load course '
+          + id));
+      req.course = course;
+      console.log('in courseByID:', req.course)
+      next();
+  });
+};
+//Read course
+exports.read = function (req, res) {
+  res.status(200).json(req.course);
+};
+
 //to verify that the current student is the creator of the current course
 exports.hasAuthorization = function (req, res, next) {
   console.log("in hasAuthorization - student: ", req.course.student);
