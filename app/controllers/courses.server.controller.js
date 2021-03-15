@@ -85,32 +85,8 @@ exports.coursesByStudent = function (req, res, next) {
 };
 
 // Courses list by Students
-// List the students who chose the course offered
-exports.coursesByStudent = function (req, res, next) {
-  var
-  var email = req.session.email;
-  console.log("session_email", email);
-  console.log("request", req.id);
-  Student.findOne({ email: req.session.email }, (err, student) => {
-    if (err) {
-      return getErrorMessage(err);
-    }    
-    console.log("Student :", student);    
-    req.student = student;
-  }).then(function () {   
-    Course.find(
-      {
-        student: req.student._id,        
-      },
-      (err, courses) => {
-        if (err) {
-          return getErrorMessage(err);
-        }        
-        res.status(200).json(courses);
-      }
-    );
-  });
-};
+// List the students who chose the course 
+//Here I have a problem
 
 
 //Update Course by given id
