@@ -7,12 +7,9 @@ const config = require("../config/config");
 const jwtExpirySeconds = 300;
 const jwtKey = config.secretKey;
 
-
-
 // Create a new error handling controller method
 const getErrorMessage = function (err) {
   var message = "";
-
   if (err.code) {
     switch (err.code) {
       case 11000:
